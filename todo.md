@@ -1,0 +1,9 @@
+- [] understand the project
+- [] update the details for an static resume
+- [] deploy on moha.movahedmanesh.ir
+- [] deploy on moha.movahedmanesh.com
+- [] add customization layer
+  - [] it should be possible to go to a specific url that is related to a company, and see the resume items updates for that specific company work opportunities.
+  - [] fill a list of companies and their jobs
+  - [?] a crawler that fetches the job details from the company website?
+  - [?] customize the resume for THE person that sees it.
