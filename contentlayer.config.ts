@@ -1,4 +1,8 @@
-import { defineDocumentType, defineNestedType, makeSource } from 'contentlayer/source-files';
+import {
+  defineDocumentType,
+  defineNestedType,
+  makeSource,
+} from 'contentlayer/source-files';
 
 export const Personal = defineDocumentType(() => ({
   name: 'Personal',
@@ -25,11 +29,6 @@ export const Personal = defineDocumentType(() => ({
       description:
         'Your general location of residence, not your personal address',
       required: true,
-    },
-    twitterUsername: {
-      type: 'string',
-      description: 'Your Twitter username without the "@" symbol',
-      required: false,
     },
   },
 }));
@@ -145,6 +144,16 @@ export const PrivateField = defineDocumentType(() => ({
       type: 'string',
       description: 'A label to describe the private field',
       required: true,
+    },
+    value: {
+      type: 'string',
+      description: 'The value of the private field',
+      required: true,
+    },
+    link: {
+      type: 'string',
+      description: 'A link to the private field',
+      required: false,
     },
   },
 }));

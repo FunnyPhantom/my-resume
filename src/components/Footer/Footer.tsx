@@ -30,24 +30,21 @@ export const Footer: React.FC = () => {
         <div className="mt-6">
           Copyright ©{new Date().getFullYear()} {fullName}
         </div>
+        <div>
+          <a className="link" href="https://github.com/funnyPhantom/my-resume">
+            Source code
+          </a>
+        </div>
 
         <div className="mt-1 text-sm">
-          This résumé was generated with{' '}
-          <a className="link" href="https://nextjs.org/">
-            Next.js
-          </a>{' '}
-          and deployed on{' '}
-          <a className="link" href="https://vercel.com/">
-            Vercel
-          </a>
-          . Learn how to deploy your own résumé with the{' '}
+          Proudly built on top of{' '}
           <a
             className="link"
             href="https://github.com/colinhemphill/nextjs-resume"
           >
             nextjs-resume
           </a>
-          !
+          .
         </div>
       </div>
     </footer>

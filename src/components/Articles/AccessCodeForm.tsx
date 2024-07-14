@@ -5,6 +5,10 @@ import { useRouter } from 'next/navigation';
 import Button from '../Button/Button';
 import { Input } from '../Input/Input';
 import { Spinner } from '../Spinner/Spinner';
+import { personal } from '@content';
+import { SiLinkedin, SiLinkedinHex } from '@icons-pack/react-simple-icons';
+import { LinkedInLink } from 'edit-me/config/links';
+import { twMerge } from 'tailwind-merge';
 
 const initialFormValues = {
   accessCode: '',
@@ -24,7 +28,7 @@ const validateCode: Resolver<FormValues> = async ({ accessCode }) => {
       values: result ? {} : { accessCode },
       errors: result
         ? {}
-        : { accessCode: { message: 'Invalid access code', type: 'validate' } },
+        : { accessCode: { message: 'Invalid contact code', type: 'validate' } },
     };
   } catch (error) {
     if (error instanceof Error) {
@@ -44,6 +48,7 @@ const validateCode: Resolver<FormValues> = async ({ accessCode }) => {
 
 export const AccessCodeForm: React.FC = () => {
   const router = useRouter();
+  const [showForm, setShowForm] = React.useState(false);
 
   const {
     handleSubmit,
@@ -61,7 +66,8 @@ export const AccessCodeForm: React.FC = () => {
 
   const isLoading = isValidating || isSubmitting;
   const disabled = isLoading || isSubmitSuccessful;
-  return isSubmitSuccessful ? (
+
+  const inside = isSubmitSuccessful ? (
     <Spinner />
   ) : (
     <form>
@@ -69,16 +75,16 @@ export const AccessCodeForm: React.FC = () => {
         <Input
           {...register('accessCode')}
           className={'rounded-r-none'}
-          placeholder={'Access Code'}
+          placeholder={'Contact Code'}
           disabled={disabled}
         />
         <Button
           onClick={onSubmit}
           disabled={disabled}
-          className={'rounded-l-none'}
+          className={'text-nowrap rounded-l-none'}
           size={'sm'}
         >
-          {isLoading ? <Spinner /> : 'Submit'}
+          {isLoading ? <Spinner /> : 'Reveal Contact Info'}
         </Button>
       </div>
       <div>
@@ -86,6 +92,32 @@ export const AccessCodeForm: React.FC = () => {
           <p className={'text-danger-7'}>{errors.accessCode.message}</p>
         )}
       </div>
+      <div className={'my-1'}>
+        <div className={'text-sm'}>
+          {"Don't"} have code? Message {personal.givenName} at{' '}
+          <span
+            className={twMerge(
+              'inline-block',
+              // 'after:absolute after:bottom-[-2px] after:left-0 after:h-[10px] after:w-[100%]',
+              // "after:content-['']",
+              // 'after:bg-accent-7 after:transition-opacity after:duration-300 after:ease-in-out',
+            )}
+          >
+            <a href={LinkedInLink.href}>
+              <SiLinkedin
+                color={SiLinkedinHex}
+                className={'mb-1 mr-1 inline size-3'}
+              />
+            </a>
+            <a className={''} href={LinkedInLink.href}>
+              {LinkedInLink.title}
+            </a>
+          </span>{' '}
+          to get one! 👀
+        </div>
+      </div>
     </form>
   );
+
+  return <div className={'my-2'}>{inside}</div>;
 };

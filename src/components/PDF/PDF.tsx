@@ -325,7 +325,7 @@ const PDF: React.FC<PDFProps> = ({ privateInformation }) => {
               {privateInformation?.map((privateField) => (
                 <View key={privateField._id}>
                   <Text style={styles.bold}>{privateField.label}:&nbsp;</Text>
-                  <Html {...htmlProps}>{privateField.body.html}</Html>
+                  <Text>{privateField.value}</Text>
                 </View>
               ))}
             </View>
