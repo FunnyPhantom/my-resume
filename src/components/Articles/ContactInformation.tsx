@@ -5,11 +5,12 @@ import { cookies } from 'next/headers';
 import { SectionHeading } from '../SectionHeading/SectionHeading';
 import { AccessCodeForm } from './AccessCodeForm';
 import { baseURL } from 'src/helpers/nextHelper';
-import { log } from 'console';
 
 export const ContactInformation: React.FC = async () => {
-  const cookiesList = cookies();
-  const accessCode = cookiesList.get('accessCode');
+  console.log('inside ContactInformation');
+  const accessCode = cookies().get('accessCode');
+  console.log('ContactInfo[accessCode]', accessCode);
+
   const hasAccessCode = accessCode && accessCode.value.length > 0;
   let isCodeValid = false;
   try {
@@ -26,13 +27,10 @@ export const ContactInformation: React.FC = async () => {
     }
   }
   let privateFields: PrivateField[] = [];
-  console.log('isCodeValid', isCodeValid);
 
   if (isCodeValid) {
     privateFields = allPrivateFields ?? [];
   }
-
-  log('privateFields', privateFields);
 
   return (
     <article>

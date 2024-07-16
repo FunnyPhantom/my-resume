@@ -1,3 +1,4 @@
+import { cookies } from 'next/headers';
 import { NextResponse } from 'next/server';
 
 const codes = [
@@ -16,13 +17,12 @@ export async function GET(request: Request) {
   ) {
     return new NextResponse('Not authorized', { status: 401 });
   }
+  cookies().set('accessCode', accessCode, {
+    maxAge: 60 * 60 * 24 * 14,
+    httpOnly: true,
+  });
 
   return new NextResponse('Authorized', {
     status: 200,
-    headers: {
-      'Set-Cookie': `accessCode=${accessCode}; Path=/; expires=${new Date(
-        Date.now() + 1000 * 60 * 60 * 24 * 365,
-      ).toUTCString()}; httpOnly;`,
-    },
   });
 }
